@@ -1,2 +1,1 @@
-import "./OOP/abstraction";
-import "./OOP/encapsulation";
+import "./OOP/index";
