@@ -2,9 +2,7 @@
 
 class Animal {
   constructor(public name: string) {}
-  move(distanceInMeters: number): void {
-    console.log(`${this.name} moved ${distanceInMeters}m.`);
-  }
+  move(distanceInMeters: number): void {}
 }
 
 class Cat extends Animal {
@@ -25,11 +23,7 @@ class Product {
     public description: string
   ) {}
 
-  display(): void {
-    console.log(
-      `product with id ${this.id} and price ${this.price} have a description ${this.description}`
-    );
-  }
+  display(): void {}
 }
 
 class Book extends Product {
@@ -45,7 +39,6 @@ class Book extends Product {
 
   display(): void {
     super.display();
-    console.log("updated from book class", this.author, this.title);
   }
 }
 
@@ -62,7 +55,6 @@ class Electronics extends Product {
 
   display(): void {
     super.display();
-    console.log("updated from electronics class", this.brand, this.model);
   }
 }
 

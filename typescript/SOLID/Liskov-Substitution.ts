@@ -2,13 +2,9 @@
 // Subtypes must be substitutable for their base types.
 
 class Bird {
-  fly() {
-    console.log("I am flying");
-  }
+  fly() {}
 }
 
 class Penguin extends Bird {
-  fly() {
-    console.log("I can't fly");
-  }
+  fly() {}
 }

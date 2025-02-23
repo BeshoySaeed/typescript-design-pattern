@@ -43,7 +43,6 @@ class FilterProducts {
 let fp = new FilterProducts();
 
 for (let i of fp.filterWithColor(products, Color.yellow)) {
-  console.log(`${i.name}: color is ${i.color}`);
 }
 
 // new way
@@ -74,9 +73,8 @@ class BetterFilter {
 }
 
 let bf = new BetterFilter();
-console.log("new approach");
+
 for (let j of bf.filter(products, new ColorSpecification(Color.red))) {
-  console.log(j);
 }
 
 // here if i want to add a new filter or something new i can add new class
