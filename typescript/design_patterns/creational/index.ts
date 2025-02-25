@@ -1,1 +1,2 @@
 import "./singleton";
+import "./prototype";
