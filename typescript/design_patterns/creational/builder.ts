@@ -59,6 +59,12 @@ enum CarTurbo {
   No = 0,
 }
 
+class CarClass {
+  public car: Car;
+
+ // we can here scale the Class as much as we want
+}
+
 // Concrete Builder
 class ConcreteCarBuilder implements CarBuilder {
   private car: Car;
@@ -68,6 +74,8 @@ class ConcreteCarBuilder implements CarBuilder {
   }
 
   private reset(): void {
+    const instance = new CarClass();
+    this.car = instance.car;
     this.car = {
       color: CarColors.Black, // Default values
       model: CarModel.Normal,
