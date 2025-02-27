@@ -68,3 +68,56 @@ const hatchback = carFactory.createCar("hatchback", "3", 2022);
     i implement it without design patterns it was not cool at all
 
 */
+
+// Payment example
+
+enum PaymentType {
+  CASH = "cash",
+  PAYPAL = "paypal",
+  STRIPE = "stripe",
+}
+
+abstract class Payment {
+  constructor(private amount: number) {}
+
+  abstract pay(): void;
+  getPayment() {
+    return this.amount;
+  }
+}
+
+class CashPayment extends Payment {
+  pay(): void {
+    console.log("pay on cash, amount:", this.getPayment());
+  }
+}
+
+class PaypalPayment extends Payment {
+  pay(): void {
+    console.log("pay on paypal, amount: ", this.getPayment());
+  }
+}
+
+class StripePayment extends Payment {
+  pay(): void {
+    console.log("pay on stripe , amount: ", this.getPayment());
+  }
+}
+
+class PaymentFactory {
+  createPayment(type: PaymentType, amount: number): Payment {
+    switch (type) {
+      case PaymentType.CASH:
+        return new CashPayment(amount);
+      case PaymentType.PAYPAL:
+        return new PaypalPayment(amount);
+      case PaymentType.STRIPE:
+        return new StripePayment(amount);
+    }
+  }
+}
+
+const paymentFactory = new PaymentFactory();
+const paypal = paymentFactory.createPayment(PaymentType.PAYPAL, 2000);
+const strip = paymentFactory.createPayment(PaymentType.STRIPE, 1000);
+const cash = paymentFactory.createPayment(PaymentType.CASH, 5000);
