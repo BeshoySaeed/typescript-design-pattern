@@ -16,11 +16,6 @@ interface ProductFamily {
   createProductB(): IProductB;
 }
 
-enum ProductType {
-  A1 = "A1",
-  B1 = "B1",
-}
-
 class ConcreteProductA1 implements IProductA {
   operationA(): void {
     console.log("creation process of product A");
