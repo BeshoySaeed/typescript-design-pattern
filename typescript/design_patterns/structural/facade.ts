@@ -116,7 +116,7 @@ class Light implements ILight {
   }
 }
 
-class HomeThreaterFacade implements IFacade {
+class HomeTheaterFacade implements IFacade {
   constructor(
     private amplifier: IAmplifier,
     private dvdPlayer: IDvdPlayer,
@@ -134,3 +134,17 @@ class HomeThreaterFacade implements IFacade {
     this.projector.setInput(this.dvdPlayer);
   }
 }
+
+const amplifier = new Amplifier();
+const dvdPlayer = new DvdPlayer();
+const projector = new Projector();
+const light = new Light();
+
+const homeTheater = new HomeTheaterFacade(
+  amplifier,
+  dvdPlayer,
+  projector,
+  light
+);
+
+homeTheater.watchMovie("spider man", 5, 12);
