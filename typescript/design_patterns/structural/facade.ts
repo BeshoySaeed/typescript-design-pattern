@@ -55,3 +55,82 @@ class CoffeeMakerFacade implements ICoffeeMaker {
     this.boiler.biolWater();
   }
 }
+
+// Home Theater example
+
+interface IAmplifier {
+  turnOn(): void;
+  setVolume(level: number): void;
+}
+
+interface IDvdPlayer {
+  turnOn(): void;
+  play(movie: string): void;
+}
+
+interface IProjector {
+  turnOn(): void;
+  setInput(dvdPlayer: IDvdPlayer): void;
+}
+
+interface ILight {
+  dim(level: number): void;
+}
+
+interface IFacade {
+  watchMovie(movie: string, volume: number, level: number): void;
+}
+
+class Amplifier implements IAmplifier {
+  turnOn(): void {
+    console.log("amplifier is on");
+  }
+  setVolume(level: number): void {
+    console.log(`amplifier volume set to ${level}`);
+  }
+}
+
+class DvdPlayer implements IDvdPlayer {
+  turnOn(): void {
+    console.log("dvd player is on");
+  }
+
+  play(): void {
+    console.log("dvd player Play");
+  }
+}
+
+class Projector implements IProjector {
+  turnOn(): void {
+    console.log("projector is on");
+  }
+
+  setInput(dvdPlayer: IDvdPlayer): void {
+    console.log("projector set input to dvd player");
+  }
+}
+
+class Light implements ILight {
+  dim(level: number): void {
+    console.log("light is dimmed level: ", level);
+  }
+}
+
+class HomeThreaterFacade implements IFacade {
+  constructor(
+    private amplifier: IAmplifier,
+    private dvdPlayer: IDvdPlayer,
+    private projector: IProjector,
+    private light: ILight
+  ) {}
+
+  watchMovie(movie: string, volume: number, level: number): void {
+    this.light.dim(level);
+    this.amplifier.turnOn();
+    this.amplifier.setVolume(volume);
+    this.dvdPlayer.turnOn();
+    this.projector.turnOn();
+    this.dvdPlayer.play(movie);
+    this.projector.setInput(this.dvdPlayer);
+  }
+}
