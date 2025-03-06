@@ -1,1 +1,2 @@
 import "./facade";
+import "./bridge";
