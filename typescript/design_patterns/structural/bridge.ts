@@ -58,3 +58,57 @@ video.mediaPlayer();
 
 const audio = new AudioPlayer(macosPlayer);
 audio.mediaPlayer();
+
+// database example
+
+interface IDatabase {
+  connect(): void;
+  query(sql: string): void;
+  close(): void;
+}
+
+class PostgreSQLDatabase implements IDatabase {
+  connect(): void {
+    console.log("connect to postgresql database");
+  }
+
+  query(sql: string): void {
+    console.log("query postgresql database, queries", sql);
+  }
+
+  close(): void {
+    console.log("close postgresql database");
+  }
+}
+
+class MongoDBDatabase implements IDatabase {
+  connect(): void {
+    console.log("connect to mongodb database");
+  }
+
+  query(sql: string): void {
+    console.log("query mongodb database, queries", sql);
+  }
+
+  close(): void {
+    console.log("close mongodb database");
+  }
+}
+
+// abstract layer
+
+abstract class DBAbstract {
+  constructor(protected database: IDatabase) {}
+  abstract fetchData(query: string): void;
+}
+
+class DB extends DBAbstract {
+  fetchData(query: string): void {
+    this.database.connect();
+    this.database.query(query);
+    this.database.close();
+  }
+}
+
+const db = new DB(new PostgreSQLDatabase());
+db.fetchData("select * from users");
