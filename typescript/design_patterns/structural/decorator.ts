@@ -51,3 +51,58 @@ console.log(
   BishoCoffee.cost(),
   BishoCoffee.description()
 );
+
+// SERVER EXAMPLE
+
+interface ServerRequest {
+  handle(request: any): void;
+}
+
+class BaseServer implements ServerRequest {
+  handle(request: any): void {
+    console.log("base server request", request);
+  }
+}
+
+abstract class ServerRequestsDecorator implements ServerRequest {
+  constructor(protected serverRequest: ServerRequest) {}
+
+  abstract handle(request: any): void;
+}
+
+class LoggingMiddleware extends ServerRequestsDecorator {
+  constructor(serverRequest: ServerRequest) {
+    super(serverRequest);
+  }
+
+  handle(request: any): void {
+    console.log("middleware layer");
+
+    if (true) {
+      this.serverRequest.handle(request);
+    }
+  }
+}
+
+class AuthMiddleware extends ServerRequestsDecorator {
+  constructor(serverRequest: ServerRequest) {
+    super(serverRequest);
+  }
+
+  handle(request: any): void {
+    console.log("auth middleware layer");
+
+    if (true) {
+      this.serverRequest.handle(request);
+    }
+  }
+}
+
+// user
+
+let request = new BaseServer();
+request.handle("request");
+request = new LoggingMiddleware(request);
+request.handle("request");
+request = new AuthMiddleware(request);
+request.handle("request");
