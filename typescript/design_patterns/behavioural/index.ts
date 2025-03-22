@@ -1,1 +1,2 @@
 import "./observer";
+import "./strategy"
